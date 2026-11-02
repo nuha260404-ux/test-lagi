@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Penerokaan interaktif tentang pengaruh dan kesan perkembangan teknologi terhadap pembentukan negara bangsa Malaysia.">
+<title>Malaysia Digital | Teknologi Pemacu Negara Bangsa</title>
+<style>
+:root{
+ --navy:#0a1b35;--navy2:#102b4d;--blue:#176b9a;--cyan:#55d6d0;
+ --gold:#f2c66d;--ink:#15243b;--muted:#64748b;--paper:#f4f7fb;
+ --white:#fff;--line:#dce5ef;--good:#13845b;--bad:#b94b54;
+ --shadow:0 18px 45px rgba(8,29,57,.12);--radius:22px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.65}
+button,input,textarea{font:inherit}
+button,a{ -webkit-tap-highlight-color:transparent}
+a{color:inherit}
+.topbar{position:sticky;top:0;z-index:50;background:rgba(7,23,45,.94);backdrop-filter:blur(14px);color:white;border-bottom:1px solid rgba(255,255,255,.1)}
+.navwrap{max-width:1180px;margin:auto;padding:12px 22px;display:flex;align-items:center;gap:20px;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:10px;font-weight:850;letter-spacing:.06em;font-size:.95rem;text-decoration:none;white-space:nowrap}
+.brandmark{width:34px;height:34px;border-radius:11px;background:linear-gradient(135deg,var(--cyan),var(--gold));display:grid;place-items:center;color:var(--navy);font-weight:900}
+.navlinks{display:flex;gap:5px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
+.navlinks button{background:transparent;color:#d9e7f5;border:0;border-radius:999px;padding:8px 11px;font-size:.82rem;cursor:pointer}
+.navlinks button:hover,.navlinks button.active{background:rgba(85,214,208,.16);color:white}
+.menu-btn{display:none;background:transparent;border:1px solid #496078;color:white;border-radius:10px;padding:7px 10px}
+.progress{height:3px;background:#223c5a}.progress span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--cyan),var(--gold));transition:width .3s}
+main{max-width:1180px;margin:auto;padding:28px 22px 80px}
+.page{display:none;animation:fade .35s ease}.page.active{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.hero{min-height:520px;border-radius:30px;overflow:hidden;position:relative;background:radial-gradient(circle at 78% 25%,rgba(85,214,208,.28),transparent 28%),linear-gradient(125deg,#08172e 0%,#10375a 58%,#176b78 100%);color:white;padding:clamp(28px,6vw,70px);display:grid;grid-template-columns:1.1fr .9fr;align-items:center;gap:24px;box-shadow:var(--shadow)}
+.hero:after{content:"";position:absolute;width:460px;height:460px;border:1px solid rgba(255,255,255,.13);border-radius:50%;right:-90px;bottom:-250px;box-shadow:0 0 0 35px rgba(255,255,255,.035),0 0 0 75px rgba(255,255,255,.025)}
+.eyebrow{font-size:.75rem;text-transform:uppercase;letter-spacing:.18em;color:var(--cyan);font-weight:800}
+h1{font-size:clamp(2.5rem,6vw,5.4rem);line-height:1.02;letter-spacing:-.055em;margin:14px 0 20px}
+h1 span{color:var(--gold)}
+.hero p{max-width:600px;color:#d9e8f5;font-size:1.08rem}
+.hero-art{position:relative;min-height:310px;display:grid;place-items:center}
+.orbit{width:min(330px,75vw);aspect-ratio:1;border:1px solid rgba(255,255,255,.25);border-radius:50%;display:grid;place-items:center;position:relative;background:radial-gradient(circle,rgba(85,214,208,.16),transparent 65%)}
+.orbit:before,.orbit:after{content:"";position:absolute;border:1px dashed rgba(255,255,255,.24);border-radius:50%;inset:12%}
+.orbit:after{inset:25%}
+.globe{width:44%;aspect-ratio:1;border-radius:50%;display:grid;place-items:center;font-size:4rem;background:linear-gradient(145deg,#2c9ca8,#164b72);box-shadow:0 0 65px rgba(85,214,208,.4)}
+.float{position:absolute;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.24);backdrop-filter:blur(8px);padding:10px 14px;border-radius:14px;font-weight:750;font-size:.84rem}
+.f1{top:8%;left:0}.f2{right:-2%;top:32%}.f3{bottom:9%;left:9%}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:999px;padding:12px 19px;font-weight:800;text-decoration:none;cursor:pointer;transition:.2s}
+.btn:hover{transform:translateY(-2px);filter:brightness(1.04)}
+.btn-primary{background:var(--gold);color:#182944}.btn-secondary{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.25);color:white}
+.btn-dark{background:var(--navy);color:white}.btn-outline{background:white;border:1px solid var(--line);color:var(--ink)}
+.hero-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:26px}
+.section-head{margin:48px 0 22px;display:flex;justify-content:space-between;gap:20px;align-items:end}
+.section-head h2{margin:0;font-size:clamp(1.7rem,3vw,2.5rem);letter-spacing:-.035em}
+.section-head p{margin:5px 0 0;color:var(--muted);max-width:650px}
+.kicker{font-size:.73rem;color:var(--blue);font-weight:850;letter-spacing:.15em;text-transform:uppercase}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.grid.two{grid-template-columns:repeat(2,1fr)}
+.card{background:white;border:1px solid var(--line);border-radius:var(--radius);padding:22px;box-shadow:0 7px 25px rgba(16,43,77,.045)}
+.card h3{margin:8px 0;font-size:1.12rem}.card p{margin:7px 0;color:#53657c}
+.icon{width:44px;height:44px;border-radius:14px;background:#e7f7f6;display:grid;place-items:center;font-size:1.35rem}
+.tag{display:inline-block;background:#eaf2f9;color:#245475;border-radius:999px;padding:4px 10px;font-size:.72rem;font-weight:800}
+.callout{background:linear-gradient(120deg,#e8f8f7,#fff8e8);border:1px solid #d4e9e6;padding:20px 22px;border-radius:18px;margin:20px 0}
+.callout strong{color:#164f5a}
+.quote{font-size:1.1rem;font-weight:750;color:#163653;border-left:4px solid var(--gold);padding:8px 0 8px 18px;margin:20px 0}
+.stat{background:var(--navy);color:white;border-radius:22px;padding:24px;position:relative;overflow:hidden}
+.stat:after{content:"";position:absolute;width:150px;height:150px;border:25px solid rgba(85,214,208,.12);border-radius:50%;right:-45px;bottom:-75px}
+.stat .number{font-size:clamp(2rem,4vw,3.1rem);font-weight:900;letter-spacing:-.05em;color:var(--gold);line-height:1.2}
+.stat small{color:#c6d8e8}
+.bar{height:9px;background:#dfe8ef;border-radius:99px;overflow:hidden;margin:10px 0 4px}
+.bar span{height:100%;display:block;background:linear-gradient(90deg,var(--blue),var(--cyan));border-radius:99px}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.split .positive{border-top:5px solid var(--good)}.split .negative{border-top:5px solid var(--bad)}
+.list{padding-left:20px;color:#52647a}.list li{margin:8px 0}
+.pillrow{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
+.pill{border:1px solid var(--line);background:white;padding:8px 13px;border-radius:999px;cursor:pointer;font-weight:750;color:#3e5369}
+.pill.selected{background:var(--navy);color:white;border-color:var(--navy)}
+.panel{background:#edf4f8;border-radius:18px;padding:20px;margin-top:14px;min-height:115px}
+.panel h3{margin:0 0 6px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap}
+.tab{border:1px solid var(--line);background:white;border-radius:12px;padding:10px 13px;cursor:pointer;font-weight:750}
+.tab.active{background:var(--navy);color:white}
+.question{background:white;border:1px solid var(--line);padding:18px;border-radius:17px;margin:14px 0}
+.question h3{margin:0 0 12px;font-size:1rem}
+.option{display:block;width:100%;text-align:left;background:#f6f8fb;border:1px solid #e2e9f0;border-radius:12px;padding:11px 13px;margin:8px 0;cursor:pointer;color:var(--ink)}
+.option:hover{border-color:var(--blue)}.option.correct{background:#e5f6ed;border-color:#80cba3}.option.wrong{background:#fff0f0;border-color:#e2a0a0}
+.feedback{font-size:.9rem;font-weight:700;margin-top:8px}
+.result{background:var(--navy);color:white;border-radius:18px;padding:20px;margin-top:18px;display:none}
+.poll-option{display:flex;align-items:center;gap:10px;margin:10px 0}.poll-option button{flex:1;text-align:left;background:white;border:1px solid var(--line);border-radius:12px;padding:12px;cursor:pointer}
+.poll-option button.chosen{border-color:var(--blue);background:#e9f6fb}
+textarea,input[type=text]{width:100%;border:1px solid #cbd7e3;border-radius:12px;padding:12px;background:white;color:var(--ink)}
+textarea{min-height:110px;resize:vertical}
+.notice{font-size:.83rem;color:var(--muted);background:#f2f5f8;border-radius:12px;padding:12px}
+.sources li{margin:13px 0}.sources a{color:#12618d;text-decoration-thickness:1px;text-underline-offset:3px;overflow-wrap:anywhere}
+.footer{margin-top:55px;background:#08172e;color:#d6e4f1;padding:32px;border-radius:24px}
+.footer a{color:var(--cyan)}
+.page-title{background:linear-gradient(120deg,#102b4d,#176b78);color:white;border-radius:25px;padding:34px;margin-bottom:25px}
+.page-title h1{font-size:clamp(2rem,4vw,3.4rem);margin:6px 0 10px}
+.page-title p{color:#d8e9f4;margin:0;max-width:780px}
+.small{font-size:.82rem;color:var(--muted)}
+.refmark{font-size:.76rem;color:#55718b}
+.footer-nav{display:flex;justify-content:space-between;gap:12px;margin-top:28px}
+.hidden{display:none!important}
+@media(max-width:850px){.hero{grid-template-columns:1fr}.hero-art{min-height:240px}.grid{grid-template-columns:repeat(2,1fr)}.navlinks{display:none;position:absolute;top:60px;left:0;right:0;background:#0a1b35;padding:12px 18px;box-shadow:var(--shadow)}.navlinks.open{display:grid;grid-template-columns:repeat(2,1fr)}.menu-btn{display:block}}
+@media(max-width:600px){main{padding:18px 14px 55px}.navwrap{padding:10px 14px}.grid,.grid.two,.split{grid-template-columns:1fr}.hero{padding:28px 22px;min-height:0}.hero-art{min-height:220px}.section-head{display:block}.footer-nav{flex-direction:column}.footer-nav .btn{width:100%}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
+
+.quiz-submit-panel{background:#eef6fa;border:1px solid #d6e5ee;border-radius:18px;padding:18px;margin:18px 0}
+.quiz-submit-panel h3{margin:0 0 8px}
+.quiz-submit-panel label{display:block;font-weight:800;margin:10px 0 6px}
+.quiz-submit-status{margin-top:12px;font-weight:750;font-size:.92rem}
+.quiz-submit-status.ok{color:var(--good)}
+.quiz-submit-status.err{color:var(--bad)}
+.quiz-submit-panel .notice{margin-top:12px}
+
+
+.video-section{margin:34px 0 42px;padding:clamp(18px,3vw,30px);background:#fff;border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+.video-section .video-frame{overflow:hidden;border-radius:16px;background:#07172d;aspect-ratio:16/9}
+.video-section video{display:block;width:100%;height:100%;object-fit:contain;background:#07172d}
+.video-section .video-note{color:var(--muted);font-size:.9rem;margin:10px 0 0}
+
+:root{
+ --navy:#21113f;--navy2:#35205f;--blue:#7354c8;--cyan:#56d8bd;
+ --gold:#ff8b78;--ink:#241b38;--muted:#746b86;--paper:#f7f3ff;
+ --white:#fff;--line:#e5dcf3;--good:#16866b;--bad:#c34f69;
+ --shadow:0 18px 48px rgba(45,24,83,.13);--radius:24px;
+}
+body{background:linear-gradient(135deg,#fbf8ff 0%,#f2f8ff 48%,#fff5f2 100%);background-attachment:fixed}
+.topbar{background:rgba(30,14,59,.94);box-shadow:0 8px 30px rgba(34,17,63,.18)}
+.brandmark{background:linear-gradient(135deg,#56d8bd,#ff8b78);box-shadow:0 0 22px rgba(86,216,189,.35)}
+.navlinks button{position:relative;transition:background .25s,color .25s,transform .25s,box-shadow .25s}
+.navlinks button:hover{background:rgba(255,139,120,.22);color:#fff;transform:translateY(-2px)}
+.navlinks button.active{background:linear-gradient(110deg,#7354c8,#a45fca);color:#fff;box-shadow:0 5px 18px rgba(115,84,200,.3)}
+.progress{background:#49356d}.progress span{background:linear-gradient(90deg,#56d8bd,#ff8b78,#b78cff);background-size:200% 100%;animation:gradientFlow 5s ease infinite}
+.hero{background:linear-gradient(-45deg,#21113f,#493078,#285b72,#7c477f);background-size:300% 300%;animation:heroGradient 16s ease infinite;box-shadow:0 24px 65px rgba(50,26,87,.24)}
+.hero:before{content:"";position:absolute;width:270px;height:270px;border-radius:50%;left:-90px;top:-100px;background:rgba(255,139,120,.22);filter:blur(5px);animation:blobDrift 12s ease-in-out infinite alternate}
+.hero:after{border-color:rgba(255,255,255,.2);box-shadow:0 0 0 35px rgba(255,255,255,.045),0 0 0 75px rgba(86,216,189,.05);animation:slowSpin 35s linear infinite}
+.eyebrow{color:#7ff0d4}h1 span{color:#ffad9e}
+.globe{background:linear-gradient(145deg,#56d8bd,#7354c8);box-shadow:0 0 70px rgba(86,216,189,.5);animation:globePulse 4s ease-in-out infinite}
+.float{background:rgba(255,255,255,.16);animation:floatBob 5s ease-in-out infinite}.f2{animation-delay:1s}.f3{animation-delay:2s}
+.btn,.navlinks button,.tab,.pill,.option,.poll-option button,.menu-btn{position:relative;overflow:hidden;transition:transform .22s ease,background .25s ease,color .25s ease,border-color .25s ease,box-shadow .25s ease}
+.btn-primary{background:linear-gradient(110deg,#ff9b86,#ffd18d);color:#28143f;box-shadow:0 8px 22px rgba(255,139,120,.25)}
+.btn-primary:hover{background:linear-gradient(110deg,#56d8bd,#a6f0d9);color:#1d2340;box-shadow:0 12px 28px rgba(86,216,189,.35)}
+.btn-secondary{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.35)}
+.btn-secondary:hover{background:#fff;color:#35205f;box-shadow:0 8px 24px rgba(255,255,255,.18)}
+.btn-dark{background:linear-gradient(110deg,#35205f,#7354c8);box-shadow:0 8px 22px rgba(53,32,95,.2)}
+.btn-dark:hover{background:linear-gradient(110deg,#7354c8,#a45fca);box-shadow:0 12px 28px rgba(115,84,200,.3)}
+.btn-outline:hover{background:#f0eaff;border-color:#a88be5;color:#50318b}
+.btn:active,.navlinks button:active,.tab:active,.pill:active,.option:active,.poll-option button:active{transform:scale(.96)}
+button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid #ff9b86;outline-offset:3px}
+.card{transition:transform .28s ease,box-shadow .28s ease,border-color .28s ease;position:relative;isolation:isolate}
+.card:hover{transform:translateY(-7px);box-shadow:0 18px 38px rgba(56,31,92,.13);border-color:#c8b5ef}
+.card.aspiration:hover{background:linear-gradient(145deg,#fff,#f5efff)}
+.icon{background:linear-gradient(135deg,#e0fff5,#f1e8ff);box-shadow:inset 0 0 0 1px rgba(115,84,200,.07)}
+.tag{background:#f0eaff;color:#56358d}
+.kicker{color:#7354c8}
+.callout{background:linear-gradient(115deg,#e8fff7,#f4edff,#fff0ed);background-size:200% 200%;animation:softColor 12s ease infinite;border-color:#e5d8f5}
+.callout strong{color:#56358d}
+.quote{color:#35205f;border-left-color:#ff8b78}
+.stat{background:linear-gradient(135deg,#21113f,#493078,#285b72);background-size:200% 200%;animation:softColor 14s ease infinite}
+.stat .number{color:#ffad9e}
+.bar span{background:linear-gradient(90deg,#7354c8,#56d8bd,#ff8b78);background-size:200% 100%;animation:gradientFlow 8s linear infinite}
+.panel{background:linear-gradient(125deg,#f0eaff,#e7fbf5);border:1px solid #e2d8f3;animation:panelIn .35s ease}
+.tab.active,.pill.selected{background:linear-gradient(110deg,#35205f,#7354c8);border-color:#7354c8;color:white;box-shadow:0 6px 18px rgba(115,84,200,.22)}
+.tab:hover,.pill:hover{border-color:#9b80d9;background:#f2edff;color:#50318b}
+.option{transition:background .2s,border-color .2s,transform .2s,box-shadow .2s}
+.option:hover{background:#f2edff;border-color:#9b80d9;box-shadow:0 5px 14px rgba(115,84,200,.1)}
+.option.correct{background:#e3fbf2;border-color:#69c9a7}.option.wrong{background:#fff0f2;border-color:#e5a0ad}
+.poll-option button:hover{background:#f2edff;border-color:#9b80d9}.poll-option button.chosen{background:#e9fff8;border-color:#56b99f;box-shadow:0 0 0 2px rgba(86,216,189,.16)}
+.question{transition:box-shadow .25s,border-color .25s}.question:focus-within{border-color:#b6a0e8;box-shadow:0 8px 24px rgba(115,84,200,.09)}
+.page-title{background:linear-gradient(-45deg,#21113f,#493078,#285b72,#7c477f);background-size:300% 300%;animation:heroGradient 18s ease infinite;box-shadow:0 15px 38px rgba(50,26,87,.16);position:relative;overflow:hidden}
+.page-title:after{content:"";position:absolute;width:210px;height:210px;border:1px solid rgba(255,255,255,.18);border-radius:50%;right:-55px;bottom:-130px;box-shadow:0 0 0 24px rgba(255,255,255,.04),0 0 0 52px rgba(86,216,189,.05);pointer-events:none}
+.video-section{background:linear-gradient(120deg,#fff 0%,#f4efff 52%,#edfff9 100%);border:1px solid #e4daf3;box-shadow:0 16px 38px rgba(56,31,92,.09);position:relative;overflow:hidden}
+.video-section:before{content:"";position:absolute;width:220px;height:220px;right:-90px;top:-100px;border-radius:50%;background:linear-gradient(135deg,rgba(255,139,120,.22),rgba(86,216,189,.2));filter:blur(8px);animation:blobDrift 10s ease-in-out infinite alternate;pointer-events:none}
+.video-section>*{position:relative}
+.footer{background:linear-gradient(120deg,#21113f,#35205f,#285b72);background-size:200% 200%;animation:softColor 18s ease infinite}
+.footer a{color:#7ff0d4}
+@keyframes heroGradient{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+@keyframes gradientFlow{0%{background-position:0% 50%}100%{background-position:200% 50%}}
+@keyframes softColor{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+@keyframes floatBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes blobDrift{0%{transform:translate(0,0) scale(1)}100%{transform:translate(-25px,28px) scale(1.16)}}
+@keyframes slowSpin{to{transform:rotate(360deg)}}
+@keyframes globePulse{0%,100%{transform:scale(1);box-shadow:0 0 45px rgba(86,216,189,.35)}50%{transform:scale(1.055);box-shadow:0 0 75px rgba(255,139,120,.42)}}
+@keyframes panelIn{from{opacity:.45;transform:translateY(7px)}to{opacity:1;transform:none}}
+@media(hover:none){.card:hover{transform:none}}
+@media(prefers-reduced-motion:reduce){.hero,.hero:after,.hero:before,.globe,.float,.callout,.stat,.progress span,.bar span,.page-title,.video-section:before,.footer{animation:none!important}}
+
+
+/* === CYBER MALAYSIA: visual refresh === */
+:root{
+ --navy:#080d25;--navy2:#111b3c;--blue:#7357ff;--cyan:#39f5df;
+ --gold:#ff5ec4;--ink:#edf2ff;--muted:#a9b5d1;--paper:#070b1c;
+ --white:#111936;--line:rgba(139,160,220,.2);--good:#42e6b1;--bad:#ff7898;
+ --shadow:0 18px 55px rgba(0,0,0,.35);--radius:22px;
+}
+html{background:#070b1c}
+body{background:radial-gradient(ellipse at 15% 8%,rgba(77,55,190,.19),transparent 35%),radial-gradient(ellipse at 90% 35%,rgba(24,190,190,.11),transparent 34%),#070b1c;color:var(--ink);background-attachment:fixed}
+.digital-rain{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:.32;mix-blend-mode:screen}
+.topbar{position:sticky;z-index:30;background:rgba(5,9,28,.86);border-bottom:1px solid rgba(57,245,223,.22);box-shadow:0 10px 35px rgba(0,0,0,.28)}
+main{position:relative;z-index:1}
+.brandmark{background:linear-gradient(135deg,#39f5df,#8c6bff 60%,#ff5ec4);color:#080d25;box-shadow:0 0 24px rgba(57,245,223,.36)}
+.brand{letter-spacing:.11em}
+.navlinks button{color:#c7d3f1;border:1px solid transparent}
+.navlinks button:hover{background:rgba(57,245,223,.13);border-color:rgba(57,245,223,.35);color:#fff;box-shadow:0 0 18px rgba(57,245,223,.15)}
+.navlinks button.active{background:linear-gradient(110deg,#6347e8,#a34ed1);border-color:rgba(190,164,255,.6);box-shadow:0 0 22px rgba(115,87,255,.35);color:#fff}
+.progress{background:#182044}.progress span{background:linear-gradient(90deg,#39f5df,#7357ff,#ff5ec4);box-shadow:0 0 12px rgba(57,245,223,.6)}
+.hero{isolation:isolate;border:1px solid rgba(57,245,223,.3);background:radial-gradient(circle at 72% 42%,rgba(57,245,223,.16),transparent 24%),linear-gradient(125deg,rgba(9,14,43,.97),rgba(25,22,75,.94) 56%,rgba(9,58,77,.94));box-shadow:0 25px 85px rgba(0,0,0,.48),inset 0 0 55px rgba(57,245,223,.05)}
+.hero:before{z-index:-1;background:repeating-linear-gradient(0deg,transparent 0 27px,rgba(57,245,223,.11) 28px,transparent 29px),repeating-linear-gradient(90deg,transparent 0 27px,rgba(115,87,255,.1) 28px,transparent 29px);width:100%;height:100%;inset:0;opacity:.45;filter:none;animation:gridSlide 22s linear infinite}
+.hero:after{border-color:rgba(57,245,223,.26);box-shadow:0 0 0 35px rgba(115,87,255,.06),0 0 0 75px rgba(57,245,223,.035)}
+.eyebrow{color:#39f5df}h1 span{color:#ff78d5;text-shadow:0 0 26px rgba(255,94,196,.35)}
+.hero p,.page-title p{color:#d1dcf5}
+.orbit{border-color:rgba(57,245,223,.42);box-shadow:0 0 55px rgba(57,245,223,.08),inset 0 0 35px rgba(115,87,255,.13)}
+.orbit:before,.orbit:after{border-color:rgba(57,245,223,.35)}
+.globe{background:linear-gradient(145deg,#20bdbb,#5943c7);box-shadow:0 0 70px rgba(57,245,223,.42);border:1px solid rgba(255,255,255,.3)}
+.float{background:rgba(11,19,49,.78);border:1px solid rgba(57,245,223,.38);color:#eafcff;box-shadow:0 8px 24px rgba(0,0,0,.22)}
+.btn{border:1px solid rgba(255,255,255,.12);letter-spacing:.01em}
+.btn:hover{transform:translateY(-4px) scale(1.025);filter:none}
+.btn:active{transform:scale(.94) translateY(1px);filter:brightness(1.3)}
+.btn-primary{background:linear-gradient(110deg,#39f5df,#8c7bff);color:#09112d;box-shadow:0 0 0 1px rgba(57,245,223,.24),0 8px 28px rgba(57,245,223,.22)}
+.btn-primary:hover{background:linear-gradient(110deg,#ff5ec4,#8c7bff);color:#fff;box-shadow:0 0 28px rgba(255,94,196,.42)}
+.btn-secondary{background:rgba(255,255,255,.06);border:1px solid rgba(57,245,223,.48);color:#eaffff}
+.btn-secondary:hover{background:rgba(57,245,223,.17);color:#fff;box-shadow:0 0 25px rgba(57,245,223,.25)}
+.btn-dark{background:linear-gradient(110deg,#4934bd,#8b43c9);color:white;box-shadow:0 8px 24px rgba(115,87,255,.24)}
+.btn-dark:hover{background:linear-gradient(110deg,#087f87,#4934bd);box-shadow:0 0 28px rgba(57,245,223,.25)}
+.btn-outline{background:rgba(17,25,54,.8);border:1px solid rgba(57,245,223,.28);color:#dce8ff}
+.btn-outline:hover{background:linear-gradient(110deg,rgba(57,245,223,.2),rgba(115,87,255,.25));border-color:#39f5df;color:#fff;box-shadow:0 0 22px rgba(57,245,223,.17)}
+.card,.question,.quiz-submit-panel{background:linear-gradient(145deg,rgba(18,27,59,.94),rgba(12,19,43,.96));border:1px solid rgba(132,153,219,.2);color:#edf2ff;box-shadow:0 12px 35px rgba(0,0,0,.2);backdrop-filter:blur(8px)}
+.card:hover{transform:translateY(-8px);border-color:rgba(57,245,223,.65);box-shadow:0 18px 45px rgba(0,0,0,.34),0 0 24px rgba(57,245,223,.12)}
+.card h3,.card h2,.question h3{color:#f5f7ff}.card p,.list{color:#b8c5e2}
+.icon{background:linear-gradient(135deg,rgba(57,245,223,.17),rgba(115,87,255,.25));border:1px solid rgba(57,245,223,.23);box-shadow:0 0 18px rgba(57,245,223,.08)}
+.tag{background:rgba(115,87,255,.2);border:1px solid rgba(164,142,255,.28);color:#d7ccff}
+.kicker{color:#39f5df}
+.section-head h2{color:#f4f6ff}.section-head p,.small,.refmark{color:#aab8d8}
+.callout{background:linear-gradient(115deg,rgba(17,53,67,.9),rgba(39,27,78,.92),rgba(70,25,73,.8));border:1px solid rgba(57,245,223,.25);color:#e9f8ff;box-shadow:inset 0 0 28px rgba(57,245,223,.035)}
+.callout strong{color:#39f5df}
+.quote{color:#e4eaff;border-left-color:#ff5ec4}
+.stat{background:linear-gradient(135deg,#111936,#29205d,#07565f);border:1px solid rgba(57,245,223,.25)}
+.stat .number{color:#39f5df;text-shadow:0 0 20px rgba(57,245,223,.3)}
+.stat small{color:#c4d5f3}.bar{background:#253052}.bar span{background:linear-gradient(90deg,#39f5df,#7357ff,#ff5ec4)}
+.split .positive{border-top:4px solid #42e6b1}.split .negative{border-top:4px solid #ff7898}
+.pill,.tab{background:rgba(17,25,54,.92);border:1px solid rgba(139,160,220,.25);color:#cbd7f1}
+.pill:hover,.tab:hover{background:rgba(115,87,255,.18);border-color:#8f7bff;color:#fff}
+.pill.selected,.tab.active{background:linear-gradient(110deg,#087f87,#5943c7);border-color:#39f5df;color:#fff;box-shadow:0 0 20px rgba(57,245,223,.16)}
+.panel{background:linear-gradient(125deg,rgba(17,53,67,.92),rgba(39,27,78,.94));border:1px solid rgba(57,245,223,.24);color:#eaf7ff}
+.panel h3{color:#39f5df}.panel p{color:#d0def7}
+.option,.poll-option button{background:rgba(28,37,72,.95);border:1px solid rgba(139,160,220,.23);color:#e8efff}
+.option:hover,.poll-option button:hover{background:rgba(115,87,255,.2);border-color:#39f5df;color:#fff;box-shadow:0 0 18px rgba(57,245,223,.12)}
+.option.chosen,.poll-option button.chosen{background:rgba(57,245,223,.15);border-color:#39f5df;color:#fff;box-shadow:0 0 0 2px rgba(57,245,223,.12),0 0 22px rgba(57,245,223,.13)}
+.option.correct{background:rgba(66,230,177,.16);border-color:#42e6b1;color:#cffff0}.option.wrong{background:rgba(255,120,152,.14);border-color:#ff7898;color:#ffe0e8}
+.feedback{color:#c7d5f2}.result{background:linear-gradient(120deg,#111936,#34206d,#07565f);border:1px solid rgba(57,245,223,.3)}
+textarea,input[type=text]{background:rgba(7,13,35,.95);border:1px solid rgba(139,160,220,.35);color:#f3f6ff}
+textarea::placeholder,input::placeholder{color:#8190b4}
+.notice{background:rgba(34,44,80,.85);color:#c3d0ed;border:1px solid rgba(139,160,220,.16)}
+.sources a{color:#39f5df}.page-title{background:linear-gradient(-45deg,#090e2b,#25205c,#07535e,#47215d);background-size:300% 300%;border:1px solid rgba(57,245,223,.25);box-shadow:0 18px 50px rgba(0,0,0,.3)}
+.page-title:after{border-color:rgba(57,245,223,.32);box-shadow:0 0 0 24px rgba(115,87,255,.08),0 0 0 52px rgba(57,245,223,.05)}
+.video-section{background:linear-gradient(130deg,rgba(17,25,54,.97),rgba(29,23,69,.96));border:1px solid rgba(57,245,223,.3);box-shadow:0 18px 50px rgba(0,0,0,.3);color:#edf2ff}
+.video-section h2{color:#fff}.video-section p{color:#c1cde8}.video-section:before{background:linear-gradient(135deg,rgba(57,245,223,.2),rgba(255,94,196,.2))}
+.video-section .video-frame{border:1px solid rgba(57,245,223,.35);box-shadow:0 0 30px rgba(57,245,223,.12)}
+.footer{background:linear-gradient(120deg,#080d25,#21164f,#064b55);border:1px solid rgba(57,245,223,.28);color:#dce8ff}
+.footer h2{color:#fff}.footer a{color:#39f5df}
+.menu-btn{background:rgba(17,25,54,.9);border:1px solid rgba(57,245,223,.4);color:#eaffff}
+#navlinks.open{background:rgba(5,9,28,.98);border:1px solid rgba(57,245,223,.25)}
+@keyframes gridSlide{from{background-position:0 0,0 0}to{background-position:0 56px,56px 0}}
+@media(max-width:850px){.navlinks{background:rgba(5,9,28,.98)}}
+@media(prefers-reduced-motion:reduce){.digital-rain{display:none!important}}
+
+
+/* Interactive team profiles */
+.team-section{
+ margin:34px 0 42px;padding:clamp(22px,4vw,42px);
+ border:1px solid rgba(57,245,223,.28);border-radius:26px;
+ background:
+  radial-gradient(circle at 12% 15%,rgba(57,245,223,.12),transparent 32%),
+  radial-gradient(circle at 90% 80%,rgba(255,94,196,.12),transparent 34%),
+  linear-gradient(135deg,#090e2b,#17183f 55%,#073b49);
+ color:#eef4ff;box-shadow:0 18px 50px rgba(0,0,0,.25);
+ position:relative;overflow:hidden
+}
+.team-section:before{
+ content:"";position:absolute;inset:0;pointer-events:none;opacity:.18;
+ background-image:linear-gradient(rgba(57,245,223,.22) 1px,transparent 1px),
+ linear-gradient(90deg,rgba(57,245,223,.22) 1px,transparent 1px);
+ background-size:28px 28px;mask-image:linear-gradient(to bottom,black,transparent)
+}
+.team-inner{position:relative;z-index:1}
+.team-heading{text-align:center;margin-bottom:22px}
+.team-heading .kicker{color:#57f5e5}
+.team-heading h2{color:#fff;margin:5px 0 8px;font-size:clamp(1.55rem,4vw,2.3rem)}
+.team-heading p{color:#c4cce5;margin:0}
+.team-name-list{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin:22px 0}
+.team-name-btn{
+ border:1px solid rgba(82,239,226,.55);border-radius:999px;
+ background:rgba(13,23,58,.78);color:#f5f7ff;padding:13px 20px;
+ font-weight:750;cursor:pointer;transition:transform .22s ease,background .22s ease,
+ box-shadow .22s ease,border-color .22s ease;color .22s ease
+}
+.team-name-btn:hover,.team-name-btn:focus-visible{
+ background:linear-gradient(100deg,#12b8b0,#6d54ed);color:#fff;
+ border-color:#a5fff5;transform:translateY(-3px);
+ box-shadow:0 0 0 3px rgba(57,245,223,.13),0 0 24px rgba(57,245,223,.35);
+ outline:none
+}
+.team-name-btn[aria-expanded="true"]{
+ background:linear-gradient(100deg,#12b8b0,#6d54ed);border-color:#a5fff5;
+ box-shadow:0 0 22px rgba(57,245,223,.28)
+}
+.team-profile{
+ display:none;max-width:760px;margin:20px auto 0;padding:18px;
+ grid-template-columns:minmax(150px,230px) 1fr;gap:22px;align-items:center;
+ border:1px solid rgba(87,245,229,.38);border-radius:20px;
+ background:rgba(7,12,34,.78);box-shadow:0 12px 35px rgba(0,0,0,.25);
+ animation:teamReveal .38s ease both
+}
+.team-profile.active{display:grid}
+.team-profile img{
+ width:100%;aspect-ratio:4/5;object-fit:cover;object-position:center 25%;
+ border-radius:15px;border:1px solid rgba(87,245,229,.55);
+ box-shadow:0 0 25px rgba(57,245,223,.13)
+}
+.team-profile h3{color:#fff;margin:0 0 8px;font-size:1.35rem;line-height:1.3}
+.team-profile .team-role{color:#57f5e5;font-size:.82rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
+.team-profile p{color:#c4cce5;margin:8px 0}
+.team-close{
+ margin-top:10px;padding:8px 14px;border-radius:999px;
+ border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.07);
+ color:#fff;cursor:pointer;transition:.2s
+}
+.team-close:hover{background:#ff5ec4;border-color:#ff9bd9;transform:scale(1.04)}
+.team-hint{text-align:center;color:#aebbdc;font-size:.82rem;margin:8px 0 0}
+@keyframes teamReveal{from{opacity:0;transform:translateY(12px) scale(.985)}to{opacity:1;transform:translateY(0) scale(1)}}
+@media(max-width:620px){
+ .team-profile{grid-template-columns:1fr;max-width:380px}
+ .team-profile img{max-height:300px;object-position:center 24%}
+ .team-name-btn{width:100%;max-width:340px}
+}
+@media(prefers-reduced-motion:reduce){.team-profile{animation:none}.team-name-btn,.team-close{transition:none}}
+
+</style>
+</head>
+<body>
+<canvas class="digital-rain" id="digitalRain" aria-hidden="true"></canvas>
+<header class="topbar">
+ <div class="navwrap">
+  <a class="brand" href="#" onclick="showPage('home');return false"><span class="brandmark">MD</span><span>MALAYSIA DIGITAL</span></a>
+  <button class="menu-btn" onclick="toggleMenu()" aria-label="Buka menu">☰ Menu</button>
+  <nav class="navlinks" id="navlinks" aria-label="Navigasi utama">
+   <button data-page="home" class="active" onclick="showPage('home')">Utama</button>
+   <button data-page="aspirasi" onclick="showPage('aspirasi')">Aspirasi</button>
+   <button data-page="pengaruh" onclick="showPage('pengaruh')">Pengaruh</button>
+   <button data-page="kesan" onclick="showPage('kesan')">Kesan</button>
+   <button data-page="data" onclick="showPage('data')">Data</button>
+   <button data-page="tindakan" onclick="showPage('tindakan')">Tindakan</button>
+   <button data-page="kuiz" onclick="showPage('kuiz')">Kuiz</button>
+   <button data-page="rujukan" onclick="showPage('rujukan')">Rujukan</button>
+  </nav>
+ </div>
+ <div class="progress"><span id="progressbar"></span></div>
+</header>
+<main>
+<section class="page active" id="home">
+ <div class="hero">
+  <div>
+   <div class="eyebrow">Interactive learning experience · Malaysia</div>
+   <h1>Teknologi<br><span>Pemacu</span><br>Negara Bangsa</h1>
+   <p>Terokai bagaimana perkembangan teknologi mempengaruhi pendidikan, ekonomi, masyarakat, pentadbiran dan identiti nasional Malaysia — serta tanggungjawab kita membina masa depan digital yang inklusif.</p>
+   <div class="hero-actions">
+    <button class="btn btn-primary" onclick="showPage('aspirasi')">Mula penerokaan ↗</button>
+    <button class="btn btn-secondary" onclick="showPage('kuiz')">Cuba kuiz</button>
+   </div>
+  </div>
+  <div class="hero-art" aria-label="Ilustrasi rangkaian digital">
+   <div class="orbit"><div class="globe">🇲🇾</div><span class="float f1">💡 Inovasi</span><span class="float f2">🤝 Perpaduan</span><span class="float f3">🌐 Digital</span></div>
+  </div>
+ </div>
+ <div class="video-section">
+  <div class="kicker">Pembuka bicara · Aspirasi Negara</div>
+  <h2>Menghayati Aspirasi Negara Melalui Muzik</h2>
+  <p>Sebagai pembuka penerokaan, hayati lagu dan muzik video tentang Aspirasi Negara. Perhatikan mesej, nilai dan semangat kebersamaan yang disampaikan, kemudian fikirkan bagaimana teknologi boleh dimanfaatkan untuk memperkukuh perpaduan serta pembentukan negara bangsa Malaysia.</p>
+  <div class="video-frame">
+   <video controls preload="metadata" playsinline>
+    <source src="video-kumpulan.mp4" type="video/mp4">
+    Pelayar anda tidak menyokong video MP4.
+   </video>
+  </div>
+  <p class="video-note">Tonton dan hayati mesej dalam muzik video ini sebagai pengenalan kepada perbincangan kita tentang Aspirasi Negara, identiti nasional dan perpaduan rakyat Malaysia.</p>
+ </div>
+
+ <section class="team-section" aria-labelledby="team-title">
+  <div class="team-inner">
+   <div class="team-heading">
+    <div class="kicker">MEET THE TEAM · MALAYSIA DIGITAL</div>
+    <h2 id="team-title">Kenali Ahli Kumpulan</h2>
+    <p>Pilih nama untuk melihat profil ahli kumpulan kami.</p>
+   </div>
+   <div class="team-name-list" role="group" aria-label="Pilih ahli kumpulan">
+    <button class="team-name-btn" type="button" aria-controls="team-profile-1" aria-expanded="false" onclick="toggleTeamProfile(1,this)">Mimi Wimplinger</button>
+    <button class="team-name-btn" type="button" aria-controls="team-profile-2" aria-expanded="false" onclick="toggleTeamProfile(2,this)">Siti Norhanisah</button>
+    <button class="team-name-btn" type="button" aria-controls="team-profile-3" aria-expanded="false" onclick="toggleTeamProfile(3,this)">Nuha Amni</button>
+   </div>
+   <article class="team-profile" id="team-profile-1" aria-live="polite">
+    <img src="ahli-mimi-wimplinger.jpg" alt="Gambar profil Mimi Wimplinger" loading="lazy">
+    <div>
+     <div class="team-role">Ahli Kumpulan 01</div>
+     <h3>Mimi Wimplinger</h3>
+     <p><strong>No. matrik:</strong> P22121378</p>
+     <p>Ahli kumpulan bagi projek Teknologi Pemacu Negara Bangsa.</p>
+     <button class="team-close" type="button" onclick="closeTeamProfiles()">Tutup profil ↑</button>
+    </div>
+   </article>
+   <article class="team-profile" id="team-profile-2" aria-live="polite">
+    <img src="ahli-siti-norhanisah.jpg" alt="Gambar profil Siti Norhanisah binti Abdul Jabar" loading="lazy">
+    <div>
+     <div class="team-role">Ahli Kumpulan 02</div>
+     <h3>Siti Norhanisah binti Abdul Jabar</h3>
+     <p><strong>No. matrik:</strong> P22121379</p>
+     <p>Ahli kumpulan bagi projek Teknologi Pemacu Negara Bangsa.</p>
+     <button class="team-close" type="button" onclick="closeTeamProfiles()">Tutup profil ↑</button>
+    </div>
+   </article>
+   <article class="team-profile" id="team-profile-3" aria-live="polite">
+    <img src="ahli-nuha-amni.jpg" alt="Gambar profil Nuha Amni binti Yusri" loading="lazy">
+    <div>
+     <div class="team-role">Ahli Kumpulan 03</div>
+     <h3>Nuha Amni binti Yusri</h3>
+     <p><strong>No. matrik:</strong> P22123834</p>
+     <p>Ahli kumpulan bagi projek Teknologi Pemacu Negara Bangsa.</p>
+     <button class="team-close" type="button" onclick="closeTeamProfiles()">Tutup profil ↑</button>
+    </div>
+   </article>
+   <p class="team-hint">Tekan nama ahli untuk membuka profil. Pilih nama lain untuk bertukar profil atau tekan butang tutup untuk menyembunyikannya.</p>
+  </div>
+ </section>
+
+ <div class="section-head"><div><div class="kicker">Peta penerokaan</div><h2>Terokai tujuh ruang pembelajaran</h2><p>Setiap ruang menghubungkan fakta, contoh Malaysia dan persoalan untuk difikirkan bersama.</p></div></div>
+ <div class="grid">
+  <article class="card"><div class="icon">🇲🇾</div><h3>01 · Aspirasi Malaysia</h3><p>Kenali hubungan teknologi dengan perpaduan, identiti nasional dan kemajuan negara.</p><button class="btn btn-outline" onclick="showPage('aspirasi')">Teroka →</button></article>
+  <article class="card"><div class="icon">🧭</div><h3>02 · Pengaruh teknologi</h3><p>Lihat perubahan dalam pendidikan, ekonomi, sosial, pentadbiran dan budaya.</p><button class="btn btn-outline" onclick="showPage('pengaruh')">Teroka →</button></article>
+  <article class="card"><div class="icon">⚖️</div><h3>03 · Kesan teknologi</h3><p>Nilai peluang dan risiko teknologi terhadap keharmonian negara bangsa.</p><button class="btn btn-outline" onclick="showPage('kesan')">Teroka →</button></article>
+  <article class="card"><div class="icon">📊</div><h3>04 · Data Malaysia</h3><p>Gunakan statistik rasmi untuk menyokong hujah dan penilaian.</p><button class="btn btn-outline" onclick="showPage('data')">Teroka →</button></article>
+  <article class="card"><div class="icon">🛠️</div><h3>05 · Tindakan bersama</h3><p>Analisis isu sebenar dan pilih tindakan yang bertanggungjawab.</p><button class="btn btn-outline" onclick="showPage('tindakan')">Teroka →</button></article>
+  <article class="card"><div class="icon">🏆</div><h3>06 · Kuiz & refleksi</h3><p>Uji kefahaman dan kongsi satu tindakan digital yang boleh diamalkan.</p><button class="btn btn-outline" onclick="showPage('kuiz')">Teroka →</button></article>
+ </div>
+ <div class="callout"><strong>Soalan pencetus:</strong> Adakah teknologi menjadikan rakyat Malaysia semakin bersatu atau semakin berpecah? Simpan jawapan awal anda — kita akan kembali kepada persoalan ini selepas penerokaan.</div>
+ <div class="footer"><div class="kicker">Idea utama</div><h2>Teknologi ialah alat. Nilai manusialah yang menentukan kesannya.</h2><p>Negara bangsa yang kukuh memerlukan kemajuan digital yang bergerak seiring dengan perpaduan, tanggungjawab, maruah dan penghormatan terhadap kepelbagaian.</p></div>
+</section>
+
+<section class="page" id="aspirasi">
+ <div class="page-title"><div class="eyebrow">01 · Asas pemikiran</div><h1>Aspirasi Malaysia</h1><p>Teknologi perlu menyokong pembentukan masyarakat yang bersatu padu, beridentiti nasional, berpengetahuan dan berdaya saing.</p></div>
+ <div class="grid two">
+  <article class="card"><span class="tag">Konsep</span><h3>Apakah negara bangsa?</h3><p>Negara bangsa merujuk kepada pembinaan sebuah negara yang mempunyai identiti kebangsaan, rasa kekitaan, kesetiaan dan kesepaduan dalam kalangan rakyat. Dalam konteks Malaysia, pembinaan identiti bersama perlu meraikan kepelbagaian kaum, agama, bahasa dan budaya.</p><p class="refmark">Huraian berasaskan Dasar Perpaduan Negara (2021).</p></article>
+  <article class="card"><span class="tag">Konteks digital</span><h3>Mengapa teknologi penting?</h3><p>Teknologi mengubah cara rakyat belajar, bekerja, berkomunikasi dan berurusan dengan kerajaan. Oleh itu, ruang digital turut menjadi ruang pembentukan pendapat, identiti, kepercayaan dan hubungan sosial.</p><p class="refmark">Rujuk MyDIGITAL (2021) dan Dasar Pendidikan Digital (2023).</p></article>
+ </div>
+ <div class="section-head"><div><div class="kicker">Aspirasi dan aplikasi</div><h2>Tekan setiap kad untuk meneroka</h2><p>Pilih aspirasi untuk melihat bagaimana teknologi boleh menyokongnya.</p></div></div>
+ <div class="grid">
+  <button class="card aspiration" onclick="aspirasi('unity')"><div class="icon">🤝</div><h3>Perpaduan nasional</h3><p>Interaksi dan kerjasama merentas komuniti.</p></button>
+  <button class="card aspiration" onclick="aspirasi('identity')"><div class="icon">🏛️</div><h3>Identiti nasional</h3><p>Warisan, sejarah dan nilai bersama.</p></button>
+  <button class="card aspiration" onclick="aspirasi('knowledge')"><div class="icon">📚</div><h3>Masyarakat berilmu</h3><p>Akses pendidikan dan literasi digital.</p></button>
+  <button class="card aspiration" onclick="aspirasi('economy')"><div class="icon">📈</div><h3>Kemajuan ekonomi</h3><p>Inovasi, pekerjaan dan keusahawanan.</p></button>
+  <button class="card aspiration" onclick="aspirasi('dignity')"><div class="icon">🫶</div><h3>Maruah dan hormat</h3><p>Ruang digital yang selamat dan inklusif.</p></button>
+  <button class="card aspiration" onclick="aspirasi('citizen')"><div class="icon">🗳️</div><h3>Warganegara bertanggungjawab</h3><p>Semak fakta dan libat urus secara beretika.</p></button>
+ </div>
+ <div class="panel" id="aspirasi-panel"><h3>Pilih satu aspirasi</h3><p>Kandungan penerangan akan dipaparkan di sini.</p></div>
+ <div class="quote">Teknologi tidak menjamin perpaduan secara automatik. Perpaduan terbina apabila teknologi digunakan dengan empati, tanggungjawab dan rasa hormat.</div>
+ <div class="callout"><strong>Aktiviti audiens — Padankan Aspirasi:</strong> Minta audiens padankan contoh seperti video warisan, kelas dalam talian, kempen kejiranan digital dan perniagaan dalam talian dengan aspirasi yang sesuai. Minta mereka jelaskan alasan, bukan sekadar memilih jawapan.</div>
+ <div class="footer-nav"><button class="btn btn-outline" onclick="showPage('home')">← Utama</button><button class="btn btn-dark" onclick="showPage('pengaruh')">Seterusnya: Pengaruh →</button></div>
+</section>
+
+<section class="page" id="pengaruh">
+ <div class="page-title"><div class="eyebrow">02 · Perubahan dalam kehidupan</div><h1>Pengaruh teknologi</h1><p>Teknologi digital mempengaruhi pelbagai bidang. Pilih bidang untuk melihat contoh Malaysia dan kaitannya dengan negara bangsa.</p></div>
+ <div class="tabs" id="influence-tabs">
+  <button class="tab active" onclick="influence('edu',this)">🎓 Pendidikan</button><button class="tab" onclick="influence('econ',this)">💼 Ekonomi</button><button class="tab" onclick="influence('social',this)">💬 Sosial</button><button class="tab" onclick="influence('gov',this)">🏢 Pentadbiran</button><button class="tab" onclick="influence('culture',this)">🎨 Budaya</button>
+ </div>
+ <div class="panel" id="influence-panel"><h3>🎓 Pendidikan digital</h3><p>Platform pembelajaran, bahan multimedia dan kelas dalam talian memperluas akses kepada ilmu. Dasar Pendidikan Digital KPM (2023) memberi tumpuan kepada murid fasih digital, pendidik kompeten dan kandungan berkualiti. Contoh Malaysia: DELIMa. Hubungan negara bangsa: melahirkan masyarakat berpengetahuan dan meningkatkan peluang pembelajaran, dengan syarat jurang akses diberi perhatian.</p></div>
+ <div class="section-head"><div><div class="kicker">Hubungan sebab dan kesan</div><h2>Bagaimana bidang ini membentuk negara?</h2></div></div>
+ <div class="grid two">
+  <article class="card"><h3>Perubahan yang berlaku</h3><p id="influence-change">Pembelajaran boleh berlaku melalui platform digital, bahan interaktif dan kolaborasi jarak jauh.</p></article>
+  <article class="card"><h3>Kaitan dengan negara bangsa</h3><p id="influence-link">Meluaskan akses ilmu dan membina kemahiran generasi masa hadapan.</p></article>
+ </div>
+ <div class="callout"><strong>Soalan analisis:</strong> Adakah akses kepada teknologi yang sama bermakna semua murid mendapat peluang pembelajaran yang sama? Jelaskan dengan mengambil kira peranti, sambungan internet, kemahiran dan sokongan keluarga.</div>
+ <div class="footer-nav"><button class="btn btn-outline" onclick="showPage('aspirasi')">← Aspirasi</button><button class="btn btn-dark" onclick="showPage('kesan')">Seterusnya: Kesan →</button></div>
+</section>
+
+<section class="page" id="kesan">
+ <div class="page-title"><div class="eyebrow">03 · Penilaian kritis</div><h1>Peluang dan cabaran</h1><p>Teknologi membawa manfaat, tetapi turut mewujudkan risiko. Kesan akhirnya bergantung pada akses, kemahiran, etika dan cara penggunaannya.</p></div>
+ <div class="split">
+  <article class="card positive"><span class="tag">Peluang</span><h2>🌱 Kesan positif</h2><ul class="list"><li><b>Perpaduan:</b> memudahkan interaksi dan kerjasama komuniti berlainan latar belakang.</li><li><b>Ekonomi:</b> membuka peluang keusahawanan, pemasaran dan pekerjaan digital.</li><li><b>Pendidikan:</b> memperluas sumber pembelajaran dan perkongsian ilmu.</li><li><b>Pentadbiran:</b> memudahkan akses kepada maklumat dan perkhidmatan kerajaan.</li><li><b>Budaya:</b> mendokumentasikan serta memperkenalkan warisan tempatan.</li></ul></article>
+  <article class="card negative"><span class="tag">Risiko</span><h2>⚠️ Kesan negatif</h2><ul class="list"><li><b>Maklumat palsu:</b> boleh mencetuskan salah faham dan ketegangan.</li><li><b>Jurang digital:</b> akses dan kemahiran yang tidak seimbang mengehadkan peluang.</li><li><b>Buli siber:</b> menjejaskan keselamatan, maruah dan kesejahteraan individu.</li><li><b>Polarisasi:</b> kandungan yang memecahbelahkan boleh mengukuhkan prasangka.</li><li><b>Privasi:</b> perkongsian data tanpa berhati-hati boleh mendedahkan maklumat peribadi.</li></ul></article>
+ </div>
+ <div class="section-head"><div><div class="kicker">Uji pertimbangan</div><h2>Peluang atau ancaman?</h2><p>Pilih jawapan bagi setiap situasi. Kemudian bincangkan alasan bersama audiens.</p></div></div>
+ <div id="scenario-list">
+  <div class="question"><h3>1. Usahawan kecil di kawasan luar bandar memasarkan produk tempatan melalui platform e-dagang.</h3><button class="option" onclick="scenario(this,true)">Peluang</button><button class="option" onclick="scenario(this,false)">Ancaman</button><div class="feedback"></div></div>
+  <div class="question"><h3>2. Pengguna menyebarkan dakwaan sensitif tentang sesuatu komuniti tanpa menyemak kesahihannya.</h3><button class="option" onclick="scenario(this,false)">Peluang</button><button class="option" onclick="scenario(this,true)">Ancaman</button><div class="feedback"></div></div>
+  <div class="question"><h3>3. Sekolah menggunakan bahan digital tetapi sebahagian murid tidak mempunyai peranti atau internet stabil.</h3><button class="option" onclick="scenario(this,true)">Cabaran / risiko</button><button class="option" onclick="scenario(this,false)">Tiada isu</button><div class="feedback"></div></div>
+ </div>
+ <div class="callout"><strong>Kesimpulan kritis:</strong> Teknologi bukan baik atau buruk secara mutlak. Dasar yang inklusif, literasi digital, etika dan tanggungjawab pengguna menentukan sama ada teknologi memperkukuh atau melemahkan kesepaduan negara bangsa.</div>
+ <div class="footer-nav"><button class="btn btn-outline" onclick="showPage('pengaruh')">← Pengaruh</button><button class="btn btn-dark" onclick="showPage('data')">Seterusnya: Data →</button></div>
+</section>
+
+<section class="page" id="data">
+ <div class="page-title"><div class="eyebrow">04 · Bukti dan statistik</div><h1>Malaysia dalam angka digital</h1><p>Gunakan data untuk menyokong hujah. Semak tahun, definisi indikator dan sumber asal sebelum membuat perbandingan.</p></div>
+ <div class="grid">
+  <article class="stat"><small>Individu menggunakan internet · 2025</small><div class="number">98.3%</div><p>Penggunaan internet dalam kalangan individu berumur 15 tahun dan ke atas.</p><small>Indikator individu, bukan isi rumah.</small></article>
+  <article class="stat"><small>Akses internet isi rumah · 2025</small><div class="number">97.1%</div><p>Isi rumah Malaysia yang mempunyai akses internet.</p><small>Bandar: 99.0% · Luar bandar: 90.7%.</small></article>
+  <article class="stat"><small>Sumbangan ICT dan e-dagang · 2025</small><div class="number">RM476.8b</div><p>Nilai sumbangan industri ICT dan e-dagang kepada KDNK Malaysia.</p><small>23.5% daripada KDNK negara.</small></article>
+ </div>
+ <div class="card" style="margin-top:18px"><h3>Jurang akses bandar dan luar bandar</h3><p>DOSM melaporkan akses internet isi rumah pada 2025 sebanyak 99.0% di kawasan bandar dan 90.7% di kawasan luar bandar. Perbezaan 8.3 mata peratus ini menunjukkan bahawa kadar akses nasional yang tinggi tidak bermakna semua komuniti menikmati peluang yang sama.</p><div class="small">Bandar · 99.0%</div><div class="bar"><span style="width:99%"></span></div><div class="small">Luar bandar · 90.7%</div><div class="bar"><span style="width:90.7%"></span></div><p class="refmark">Sumber: DOSM, ICT Use and Access by Individuals and Households Survey Report 2025 (diterbitkan 23 April 2026).</p></div>
+ <div class="callout"><strong>Cara membaca data:</strong> Angka 98.3% ialah penggunaan internet oleh individu berumur 15 tahun ke atas; 97.1% ialah akses internet isi rumah; 99.0% dan 90.7% membandingkan akses isi rumah bandar dan luar bandar. Jangan bandingkan indikator yang berlainan seolah-olah mengukur perkara yang sama.</div>
+ <div class="section-head"><div><div class="kicker">Aktiviti analisis</div><h2>Apakah maksud data ini?</h2></div></div>
+ <div class="question"><h3>Jika akses internet luar bandar lebih rendah berbanding bandar, apakah implikasi yang mungkin berlaku?</h3><button class="option" onclick="reveal(this,'Akses dan kualiti sambungan yang tidak seimbang boleh mempengaruhi peluang pendidikan, pekerjaan dan penggunaan perkhidmatan digital.')">Lihat cadangan jawapan</button><div class="feedback"></div></div>
+ <p class="notice">Nota integriti data: angka di atas menggunakan penerbitan DOSM yang tersedia setakat 2 November 2026. Penggunaan internet individu merujuk kepada individu berumur 15 tahun ke atas; akses internet isi rumah ialah indikator berasingan. Semak jadual dan nota metodologi laporan asal sebelum pembentangan.</p>
+ <div class="footer-nav"><button class="btn btn-outline" onclick="showPage('kesan')">← Kesan</button><button class="btn btn-dark" onclick="showPage('tindakan')">Seterusnya: Tindakan →</button></div>
+</section>
+
+<section class="page" id="tindakan">
+ <div class="page-title"><div class="eyebrow">05 · Extension — pembelajaran melangkaui bilik kuliah</div><h1>Daripada isu kepada tindakan</h1><p>Hubungkan pembelajaran dengan komuniti. Kenal pasti cabaran sebenar, dengar pandangan pihak lain dan cadangkan tindakan yang boleh dilaksanakan.</p></div>
+ <div class="grid two">
+  <article class="card"><div class="icon">🔎</div><h3>Isu 1 · Maklumat palsu</h3><p>Maklumat yang tidak disahkan boleh mengelirukan masyarakat dan menjejaskan kepercayaan.</p><b>Tindakan:</b><ul class="list"><li>Semak sumber dan tarikh.</li><li>Bandingkan dengan sumber rasmi.</li><li>Jangan sebarkan kandungan yang belum disahkan.</li></ul></article>
+  <article class="card"><div class="icon">📶</div><h3>Isu 2 · Jurang digital</h3><p>Perbezaan peranti, sambungan dan kemahiran boleh mengehadkan penyertaan dalam kehidupan digital.</p><b>Tindakan:</b><ul class="list"><li>Adakan bimbingan literasi digital.</li><li>Kenal pasti komuniti yang memerlukan sokongan.</li><li>Galakkan akses dan bahan pembelajaran inklusif.</li></ul></article>
+  <article class="card"><div class="icon">🫶</div><h3>Isu 3 · Etika dan maruah</h3><p>Penghinaan, buli siber dan pencerobohan privasi boleh menjejaskan hak serta maruah individu.</p><b>Tindakan:</b><ul class="list"><li>Berkomunikasi dengan berhemah.</li><li>Minta izin sebelum berkongsi gambar atau data.</li><li>Hormati perbezaan budaya dan pandangan.</li></ul></article>
+  <article class="card"><div class="icon">🏛️</div><h3>Isu 4 · Identiti budaya</h3><p>Warisan tempatan memerlukan usaha pendokumentasian dan perkongsian yang bertanggungjawab.</p><b>Tindakan:</b><ul class="list"><li>Hasilkan kandungan warisan setempat.</li><li>Nyatakan sumber dan pemilik karya.</li><li>Dapatkan persetujuan komuniti yang terlibat.</li></ul></article>
+ </div>
+ <div class="section-head"><div><div class="kicker">Aktiviti membuat keputusan</div><h2>Cabaran Digital Malaysia</h2><p>Bincangkan situasi berikut dalam kumpulan kecil. Pilih tindakan dan jelaskan sebabnya.</p></div></div>
+ <div class="card">
+  <span class="tag">Situasi simulasi</span>
+  <h3>Mesej tular yang belum disahkan</h3>
+  <p>Satu mesej tular mengandungi dakwaan sensitif berkaitan komuniti tertentu. Mesej itu mula dikongsi dalam kumpulan kejiranan. Apakah tindakan paling bertanggungjawab?</p>
+  <div class="question"><button class="option" onclick="decision(this,false)">A. Terus kongsikan supaya semua orang tahu.</button><button class="option" onclick="decision(this,true)">B. Tangguhkan perkongsian, semak sumber yang boleh dipercayai dan elakkan kandungan yang boleh memudaratkan komuniti.</button><button class="option" onclick="decision(this,false)">C. Tambah andaian sendiri supaya mesej lebih menarik.</button><div class="feedback"></div></div>
+  <p class="small">Minta audiens menerangkan bagaimana tindakan pilihan mereka melindungi maruah, mengurangkan salah faham dan menyokong perpaduan.</p>
+ </div>
+ <div class="section-head"><div><div class="kicker">3E · Extension</div><h2>Suara komuniti</h2><p>Gunakan borang ini untuk aktiviti kelas. Untuk kutipan sebenar merentas peranti, sambungkan butang kepada Google Forms atau Microsoft Forms kumpulan.</p></div></div>
+ <div class="card">
+  <label for="community">Apakah satu cabaran teknologi yang anda lihat dalam komuniti?</label><textarea id="community" placeholder="Tulis jawapan ringkas..."></textarea>
+  <label for="action" style="display:block;margin-top:12px">Apakah satu tindakan yang boleh membantu?</label><textarea id="action" placeholder="Cadangkan tindakan yang praktikal..."></textarea>
+  <button class="btn btn-dark" style="margin-top:12px" onclick="saveReflection()">Simpan refleksi pada peranti ini</button>
+  <p id="reflection-msg" class="feedback"></p>
+  <p class="notice">Refleksi disimpan sementara dalam pelayar/peranti ini sahaja. Ia tidak dihantar kepada pembentang atau disimpan dalam pangkalan data. Untuk bukti Extension sebenar, kumpulan perlu mengumpul respons melalui borang dalam talian dan memaparkan dapatan agregat dengan izin responden.</p>
+ </div>
+ <div class="callout"><strong>Cadangan bukti Extension:</strong> Jalankan mini kajian ringkas bersama 5–10 orang secara sukarela (contohnya guru atau ahli komuniti). Tanya cabaran penggunaan teknologi dan cara teknologi boleh menyokong perpaduan. Paparkan ringkasan tanpa nama, kaedah kutipan, tarikh dan bilangan responden. Jangan mendakwa kajian telah dibuat jika belum dilaksanakan.</div>
+ <div class="footer-nav"><button class="btn btn-outline" onclick="showPage('data')">← Data</button><button class="btn btn-dark" onclick="showPage('kuiz')">Seterusnya: Kuiz →</button></div>
+</section>
+
+<section class="page" id="kuiz">
+ <div class="page-title"><div class="eyebrow">06 · Semak kefahaman</div><h1>Kuiz & refleksi</h1><p>Jawab lima soalan untuk menguji pemahaman tentang teknologi dan pembentukan negara bangsa Malaysia.</p></div>
+ <div class="quiz-submit-panel">
+  <h3>📝 Maklumat responden</h3>
+  <label for="respondent-name">Nama samaran atau kod responden</label>
+  <input id="respondent-name" type="text" maxlength="40" autocomplete="off" placeholder="Contoh: Responden 01" />
+  <p class="notice">Tidak perlu masukkan nombor telefon, alamat atau maklumat peribadi. Nama samaran/kod sahaja sudah memadai.</p>
+ </div>
+ <div id="quiz-area"></div>
+ <div class="result" id="quiz-result">
+  <h2 id="score-title">Keputusan kuiz</h2>
+  <p id="score-text"></p>
+  <p id="submission-status" class="quiz-submit-status"></p>
+  <button class="btn btn-primary" onclick="startQuiz()">Cuba semula</button>
+ </div>
+ <div class="section-head"><div><div class="kicker">Refleksi akhir</div><h2>Satu tindakan bermakna</h2><p>Lengkapkan ayat ini dan kongsikan dengan audiens.</p></div></div>
+ <div class="card"><h3>“Saya akan menggunakan teknologi secara bertanggungjawab dengan cara...”</h3><textarea id="final-reflection" placeholder="Contohnya: menyemak kesahihan maklumat sebelum berkongsi..."></textarea><button class="btn btn-dark" style="margin-top:12px" onclick="showFinalReflection()">Paparkan refleksi</button><div class="panel hidden" id="final-output"></div></div>
+ <div class="footer-nav"><button class="btn btn-outline" onclick="showPage('tindakan')">← Tindakan</button><button class="btn btn-dark" onclick="showPage('rujukan')">Seterusnya: Rujukan →</button></div>
+</section>
+
+<section class="page" id="rujukan">
+ <div class="page-title"><div class="eyebrow">07 · Integriti akademik</div><h1>Rujukan & sumber digital</h1><p>Utamakan sumber primer dan rasmi. Semak dokumen asal sebelum memetik fakta, statistik atau dasar dalam pembentangan.</p></div>
+ <div class="card">
+  <h2>Senarai rujukan utama</h2>
+  <ol class="sources">
+   <li><b>MyDIGITAL.</b> (2021). <i>Malaysia Digital Economy Blueprint</i>. <a href="https://ekonomi.gov.my/sites/default/files/2021-03/Malaysia-Digital-Economy-Blueprint.pdf" target="_blank" rel="noopener">Dokumen rasmi PDF</a>.</li>
+   <li><b>Kementerian Perpaduan Negara.</b> (2021). <i>Dasar Perpaduan Negara</i>. <a href="https://www.perpaduan.gov.my/index.php/bm/component/phocadownload/file/228-dasar-perpaduan-negara-dpn" target="_blank" rel="noopener">Dokumen rasmi</a>.</li>
+   <li><b>Kementerian Pendidikan Malaysia.</b> (2023). <i>Dasar Pendidikan Digital</i>. <a href="https://www.moe.gov.my/storage/files/shares/Dasar/Dasar%20Pendidikan%20Digital/Dasar%20Pendidikan%20Digital.pdf" target="_blank" rel="noopener">Dokumen rasmi PDF</a>.</li>
+   <li><b>Department of Statistics Malaysia.</b> (2026). <i>ICT Use and Access by Individuals and Households Survey Report, 2025</i>. <a href="https://www.dosm.gov.my/portal-main/release-content/ict-use-and-access-by-individuals-and-households-survey-report-2025" target="_blank" rel="noopener">Laporan dan statistik rasmi</a>.</li>
+   <li><b>Department of Statistics Malaysia.</b> (2026). <i>Information and Communication Technology Satellite Account 2025</i>. <a href="https://www.dosm.gov.my/portal-main/release-content/information-and-communication-technology-satellite-account-2025" target="_blank" rel="noopener">Laporan dan statistik rasmi</a>.</li>
+   <li><b>Department of Statistics Malaysia.</b> (2025). <i>Malaysia Digital Economy, 2025</i>. <a href="https://www.dosm.gov.my/portal-main/release-content/malaysia-digital-economy-2025" target="_blank" rel="noopener">Laporan rasmi</a>.</li>
+   <li><b>OpenDOSM.</b> (2025–2026). <i>Internet Use by State and Sex</i>. <a href="https://data.gov.my/data-catalogue/icths_internet_sex" target="_blank" rel="noopener">Set data rasmi</a>.</li>
+  </ol>
+  <p class="notice">Pautan portal DOSM dan kementerian ialah pintu masuk kepada penerbitan rasmi. Cari tajuk laporan yang dinyatakan dan masukkan pautan PDF atau halaman laporan yang tepat selepas kumpulan mengesahkannya. Jangan masukkan butiran jilid, nombor halaman atau DOI yang belum disemak.</p>
+ </div>
+ <div class="card" style="margin-top:18px">
+  <h2>Etika penggunaan bahan digital</h2>
+  <ul class="list"><li>Gunakan imej, video, muzik dan grafik yang mempunyai lesen sesuai atau kebenaran pemilik.</li><li>Nyatakan pencipta, tajuk, sumber dan lesen jika berkenaan.</li><li>Jangan paparkan wajah, nama atau maklumat responden tanpa persetujuan.</li><li>Elakkan kandungan stereotaip, diskriminasi, penghinaan dan kebencian.</li><li>Semak fakta dan tarikh penerbitan sebelum berkongsi.</li></ul>
+ </div>
+ <div class="callout"><strong>Nota pembentangan:</strong> Setiap ahli kumpulan perlu menguasai sumber yang digunakan dan boleh menerangkan bagaimana sumber tersebut menyokong hujah. Senarai rujukan bukan hiasan — ia bukti akauntabiliti akademik.</div>
+ <div class="footer-nav"><button class="btn btn-outline" onclick="showPage('kuiz')">← Kuiz</button><button class="btn btn-dark" onclick="showPage('home')">Kembali ke utama ↑</button></div>
+</section>
+</main>
+<script>
+// Latar kod digital bergerak (canvas) — dihentikan jika pengguna memilih reduced motion.
+(function(){
+ const canvas=document.getElementById('digitalRain');
+ if(!canvas || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+ const ctx=canvas.getContext('2d'); if(!ctx) return;
+ const chars='01アイウエオカキクケコサシスセソABCDEFGHIJKLMNOPQRSTUVWXYZ<>/{}[]';
+ let width=0,height=0,drops=[],font=15,raf=0;
+ function resize(){
+  const dpr=Math.min(window.devicePixelRatio||1,1.5);
+  width=window.innerWidth;height=window.innerHeight;
+  canvas.width=Math.floor(width*dpr);canvas.height=Math.floor(height*dpr);
+  canvas.style.width=width+'px';canvas.style.height=height+'px';ctx.setTransform(dpr,0,0,dpr,0,0);
+  const cols=Math.ceil(width/font);drops=Array.from({length:cols},()=>Math.random()*-height/font);
+ }
+ function draw(){
+  ctx.fillStyle='rgba(5, 8, 25, 0.105)';ctx.fillRect(0,0,width,height);
+  ctx.font=font+'px monospace';
+  for(let i=0;i<drops.length;i++){
+   const ch=chars[Math.floor(Math.random()*chars.length)];
+   ctx.fillStyle=Math.random()>.965?'rgba(255,139,120,.9)':'rgba(80,235,220,.48)';
+   ctx.fillText(ch,i*font,drops[i]*font);
+   if(drops[i]*font>height && Math.random()>.975)drops[i]=0;
+   drops[i]+=.42+Math.random()*.34;
+  }
+  raf=requestAnimationFrame(draw);
+ }
+ resize();draw();window.addEventListener('resize',resize,{passive:true});
+ document.addEventListener('visibilitychange',()=>{if(document.hidden){cancelAnimationFrame(raf)}else if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){draw()}});
+})();
+const pages=['home','aspirasi','pengaruh','kesan','data','tindakan','kuiz','rujukan'];
+function showPage(id){
+ document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.id===id));
+ document.querySelectorAll('.navlinks button').forEach(b=>b.classList.toggle('active',b.dataset.page===id));
+ const idx=pages.indexOf(id);document.getElementById('progressbar').style.width=((idx+1)/pages.length*100)+'%';
+ document.getElementById('navlinks').classList.remove('open');window.scrollTo({top:0,behavior:'smooth'});
+}
+function toggleMenu(){document.getElementById('navlinks').classList.toggle('open')}
+const aspirations={
+ unity:['Perpaduan nasional','Platform digital boleh menghubungkan komuniti melalui kempen kejiranan, projek sukarelawan dan perbincangan yang menghormati perbezaan. Contoh: kempen komuniti rentas budaya. Ukuran kejayaan bukan jumlah tontonan sahaja, tetapi interaksi yang bermakna dan saling menghormati.'],
+ identity:['Identiti nasional','Arkib, video dan penceritaan digital boleh memperkenalkan sejarah serta warisan Malaysia kepada generasi muda. Kandungan perlu tepat, mewakili komuniti secara adil dan mendapatkan izin apabila melibatkan bahan milik pihak lain.'],
+ knowledge:['Masyarakat berilmu','Platform pembelajaran dan sumber terbuka memperluas peluang memperoleh ilmu. Namun, akses peranti, sambungan, kebolehcapaian dan kemahiran perlu diambil kira supaya tiada murid tercicir.'],
+ economy:['Kemajuan ekonomi','E-dagang dan perkhidmatan digital membantu perniagaan mencapai pelanggan lebih luas. Sokongan kemahiran, keselamatan transaksi dan capaian internet penting agar peluang ekonomi lebih inklusif.'],
+ dignity:['Maruah dan hormat','Pengguna perlu mengelakkan penghinaan, buli siber dan pendedahan data tanpa izin. Hormati identiti, agama, budaya, hak dan pandangan orang lain ketika menghasilkan atau berkongsi kandungan.'],
+ citizen:['Warganegara bertanggungjawab','Rakyat boleh mengikuti maklumat awam dan menyuarakan pandangan secara beretika. Semak fakta, bezakan pendapat dengan bukti dan gunakan saluran yang sesuai.']
+};
+function aspirasi(key){const [title,desc]=aspirations[key];document.getElementById('aspirasi-panel').innerHTML=`<h3>${title}</h3><p>${desc}</p>`}
+const influences={
+ edu:{title:'🎓 Pendidikan digital',desc:'Platform pembelajaran, bahan multimedia dan kelas dalam talian memperluas akses kepada ilmu. Dasar Pendidikan Digital KPM (2023) memberi tumpuan kepada murid fasih digital, pendidik kompeten dan kandungan berkualiti. Contoh Malaysia: DELIMa. Hubungan negara bangsa: melahirkan masyarakat berpengetahuan dan meningkatkan peluang pembelajaran, dengan syarat jurang akses diberi perhatian.',change:'Pembelajaran boleh berlaku melalui platform digital, bahan interaktif dan kolaborasi jarak jauh.',link:'Meluaskan akses ilmu dan membina kemahiran generasi masa hadapan.'},
+ econ:{title:'💼 Ekonomi digital',desc:'E-dagang, pembayaran digital dan pemasaran dalam talian membolehkan perniagaan mencapai pelanggan yang lebih luas. Contoh Malaysia: perusahaan kecil menggunakan platform e-dagang dan DuitNow QR. Namun, keselamatan transaksi, kemahiran dan akses perlu diperkukuh.',change:'Perniagaan memasarkan produk secara dalam talian dan pengguna membuat pembayaran digital.',link:'Membuka peluang keusahawanan, pekerjaan dan inovasi serta menyokong daya saing negara.'},
+ social:{title:'💬 Sosial dan komunikasi',desc:'Media sosial dan aplikasi pesanan memudahkan perkongsian maklumat serta kerjasama komuniti. Pada masa sama, maklumat palsu dan ujaran kebencian boleh mencetuskan salah faham. Literasi media dan komunikasi berhemah amat penting.',change:'Maklumat, pandangan dan kempen komuniti tersebar dengan pantas merentas lokasi.',link:'Boleh menghubungkan masyarakat, tetapi perlu disertai etika dan semakan fakta untuk menjaga keharmonian.'},
+ gov:{title:'🏢 Pentadbiran dan perkhidmatan awam',desc:'Perkhidmatan kerajaan dalam talian memudahkan urusan, capaian maklumat dan interaksi rakyat dengan agensi. Pendigitalan perlu mengambil kira privasi, keselamatan data, kebolehcapaian dan bantuan kepada pengguna yang kurang mahir.',change:'Sebahagian urusan dan maklumat perkhidmatan awam boleh dicapai melalui saluran digital.',link:'Meningkatkan kemudahan perkhidmatan dan penyertaan sivik apabila sistem mudah dicapai serta dipercayai.'},
+ culture:{title:'🎨 Budaya dan identiti nasional',desc:'Video, fotografi dan arkib digital membantu mendokumentasikan bahasa, seni, makanan, perayaan dan warisan tempatan. Kandungan perlu mengelakkan stereotaip serta mendapatkan persetujuan komuniti dan pemilik karya.',change:'Warisan boleh direkod, dikongsi dan diperkenalkan kepada generasi muda serta khalayak antarabangsa.',link:'Menyokong pemeliharaan warisan dan rasa bangga terhadap kepelbagaian identiti Malaysia.'}
+};
+function influence(key,btn){document.querySelectorAll('#influence-tabs .tab').forEach(x=>x.classList.remove('active'));btn.classList.add('active');let d=influences[key];document.getElementById('influence-panel').innerHTML=`<h3>${d.title}</h3><p>${d.desc}</p>`;document.getElementById('influence-change').textContent=d.change;document.getElementById('influence-link').textContent=d.link}
+function scenario(btn,correct){let q=btn.closest('.question');q.querySelectorAll('.option').forEach(b=>b.disabled=true);btn.classList.add(correct?'correct':'wrong');q.querySelector('.feedback').textContent=correct?'Tepat. Fikirkan sebab dan kesannya terhadap masyarakat.':'Cuba nilai semula kesan situasi terhadap peluang, keselamatan atau keharmonian.'}
+function decision(btn,correct){let q=btn.closest('.question');q.querySelectorAll('.option').forEach(b=>b.disabled=true);btn.classList.add(correct?'correct':'wrong');q.querySelector('.feedback').textContent=correct?'Pilihan bertanggungjawab: semak kesahihan, elakkan mudarat dan hormati komuniti.':'Pilihan ini boleh meningkatkan kekeliruan atau mudarat. Semak maklumat dan fikirkan kesan kepada orang lain.'}
+function reveal(btn,text){btn.disabled=true;btn.classList.add('correct');btn.closest('.question').querySelector('.feedback').textContent=text}
+function saveReflection(){let a=document.getElementById('community').value.trim(),b=document.getElementById('action').value.trim();if(!a||!b){document.getElementById('reflection-msg').textContent='Sila lengkapkan kedua-dua ruang.';return}try{localStorage.setItem('md-reflection',JSON.stringify({challenge:a,action:b}));document.getElementById('reflection-msg').textContent='Refleksi disimpan pada peranti ini.'}catch(e){document.getElementById('reflection-msg').textContent='Pelayar tidak membenarkan simpanan. Salin jawapan anda.'}}
+const questions=[
+ {q:'Apakah antara asas penting pembentukan negara bangsa Malaysia?',o:['Identiti bersama, perpaduan dan rasa kekitaan','Penggunaan satu aplikasi sahaja','Persaingan antara komuniti','Jumlah pengikut media sosial'],a:0,e:'Negara bangsa memerlukan identiti kebangsaan, perpaduan dan kesepaduan sambil menghormati kepelbagaian.'},
+ {q:'Bagaimanakah teknologi boleh menyokong pendidikan?',o:['Menggantikan semua peranan guru','Memperluas akses kepada sumber dan pembelajaran','Menghapuskan keperluan berfikir kritis','Memastikan semua murid mempunyai akses yang sama secara automatik'],a:1,e:'Teknologi memperluas sumber pembelajaran, tetapi akses dan sokongan yang seimbang tetap diperlukan.'},
+ {q:'Apakah risiko berkongsi maklumat yang belum disahkan?',o:['Meningkatkan ketepatan','Menjamin perpaduan','Mencetuskan salah faham dan ketegangan','Meningkatkan privasi'],a:2,e:'Maklumat tidak sahih boleh mengelirukan masyarakat dan menjejaskan keharmonian.'},
+ {q:'Apakah tindakan beretika apabila menerima mesej tular yang sensitif?',o:['Terus sebarkan','Tambah andaian','Semak sumber dan jangan sebarkan jika belum sahih','Ubah tajuk supaya lebih sensasi'],a:2,e:'Semak fakta, rujuk sumber dipercayai dan elakkan kandungan yang boleh memudaratkan orang lain.'},
+ {q:'Apakah maksud elemen Extension dalam tugasan ini?',o:['Menggunakan slaid yang banyak','Menghubungkan pembelajaran dengan komuniti dan situasi sebenar','Menambah animasi semata-mata','Membaca semua teks pada skrin'],a:1,e:'Extension bermaksud melanjutkan pembelajaran melampaui tugasan melalui aplikasi, komuniti, maklum balas dan tindakan sebenar.'}
+];
+// Tampal URL Web App Google Apps Script di sini selepas deploy.
+const GOOGLE_SCRIPT_URL = 'TAMPAL_URL_WEB_APP_GOOGLE_APPS_SCRIPT_DI_SINI';
+let answers={};
+let quizSubmissionInProgress=false;
+function startQuiz(){
+ answers={};
+ quizSubmissionInProgress=false;
+ document.getElementById('quiz-result').style.display='none';
+ document.getElementById('submission-status').textContent='';
+ document.getElementById('submission-status').className='quiz-submit-status';
+ document.getElementById('quiz-area').innerHTML=questions.map((q,i)=>`<div class="question" id="q${i}"><h3>${i+1}. ${q.q}</h3>${q.o.map((o,j)=>`<button class="option" onclick="answer(${i},${j},this)">${String.fromCharCode(65+j)}. ${o}</button>`).join('')}<div class="feedback" id="f${i}"></div></div>`).join('')+`<button class="btn btn-dark" id="quiz-submit-button" onclick="finishQuiz()">Hantar jawapan</button>`;
+}
+function answer(i,j,btn){
+ answers[i]=j;
+ let q=document.getElementById('q'+i);
+ q.querySelectorAll('.option').forEach(b=>{b.classList.remove('chosen');b.style.borderColor=''});
+ btn.classList.add('chosen');btn.style.borderColor='var(--blue)';
+}
+async function finishQuiz(){
+ if(quizSubmissionInProgress)return;
+ if(Object.keys(answers).length!==questions.length){alert('Sila jawab semua soalan dahulu.');return}
+ const respondent=document.getElementById('respondent-name').value.trim();
+ if(!respondent){alert('Sila masukkan nama samaran atau kod responden dahulu.');document.getElementById('respondent-name').focus();return}
+ let score=0;
+ const answerDetails=questions.map((q,i)=>{
+  const isCorrect=answers[i]===q.a;
+  if(isCorrect)score++;
+  const el=document.getElementById('f'+i);
+  el.textContent=(isCorrect?'Betul. ':'Belum tepat. ')+q.e;
+  el.style.color=isCorrect?'var(--good)':'var(--bad)';
+  return {question:q.q,selected:q.o[answers[i]],correctAnswer:q.o[q.a],isCorrect:isCorrect};
+ });
+ document.getElementById('score-title').textContent=`Skor anda: ${score}/${questions.length}`;
+ document.getElementById('score-text').textContent=score===5?'Cemerlang! Anda memahami hubungan teknologi dan negara bangsa.':'Teruskan penerokaan dan bincangkan maklum balas bagi setiap soalan.';
+ document.getElementById('quiz-result').style.display='block';
+ document.getElementById('quiz-result').scrollIntoView({behavior:'smooth'});
+ const status=document.getElementById('submission-status');
+ const submitButton=document.getElementById('quiz-submit-button');
+ quizSubmissionInProgress=true;
+ if(submitButton){submitButton.disabled=true;submitButton.textContent='Menghantar...'}
+ if(!GOOGLE_SCRIPT_URL.startsWith('https://script.google.com/macros/s/')){
+  status.textContent='Markah dipaparkan, tetapi rekod belum dihantar. Sambungan Google Sheets belum disediakan oleh pemilik website.';
+  status.className='quiz-submit-status err';
+  quizSubmissionInProgress=false;
+  if(submitButton){submitButton.disabled=false;submitButton.textContent='Hantar jawapan'}
+  return;
+ }
+ const payload={
+  respondent:respondent,
+  score:score,
+  total:questions.length,
+  submittedAt:new Date().toISOString(),
+  answers:answerDetails
+ };
+ try{
+  // no-cors digunakan kerana Google Apps Script Web App tidak menyediakan CORS biasa untuk halaman GitHub Pages.
+  await fetch(GOOGLE_SCRIPT_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(payload)});
+  status.textContent='Permintaan penghantaran telah dibuat. Pemilik website boleh menyemak rekod baharu dalam Google Sheets. Jika rekod tidak muncul, semak URL Web App dan tetapan akses Apps Script.';
+  status.className='quiz-submit-status ok';
+ }catch(error){
+  status.textContent='Penghantaran tidak berjaya. Sila cuba lagi atau maklumkan kepada pembentang.';
+  status.className='quiz-submit-status err';
+  quizSubmissionInProgress=false;
+  if(submitButton){submitButton.disabled=false;submitButton.textContent='Cuba hantar semula'}
+ }
+}
+function showFinalReflection(){let t=document.getElementById('final-reflection').value.trim();if(!t){alert('Tulis refleksi dahulu.');return}let o=document.getElementById('final-output');o.textContent='Saya akan menggunakan teknologi secara bertanggungjawab dengan cara: '+t;o.classList.remove('hidden')}
+startQuiz();document.getElementById('progressbar').style.width=(1/pages.length*100)+'%';
+
+function toggleTeamProfile(id,button){
+ const target=document.getElementById('team-profile-'+id);
+ const wasOpen=target.classList.contains('active');
+ closeTeamProfiles();
+ if(!wasOpen){
+  target.classList.add('active');
+  button.setAttribute('aria-expanded','true');
+  target.scrollIntoView({behavior:'smooth',block:'nearest'});
+ }
+}
+function closeTeamProfiles(){
+ document.querySelectorAll('.team-profile').forEach(el=>el.classList.remove('active'));
+ document.querySelectorAll('.team-name-btn').forEach(el=>el.setAttribute('aria-expanded','false'));
+}
+
+</script>
+</body>
+</html>
